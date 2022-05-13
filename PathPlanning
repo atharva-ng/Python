@@ -1,0 +1,52 @@
+import matplotlib.pyplot as plt
+import random
+
+class rrtmap:
+    def __init__ (self,xw,yw,start,end):
+        self.xw=xw
+        self.yw=yw
+        self.start=start
+        self.end=end
+        
+        (xs,ys)=start
+        (xe,ye)=end
+        
+        self.x=[]
+        self.y=[]
+        
+        self.parentx=xs
+        self.parenty=ys
+        
+        self.x.append(xs)
+        self.y.append(ys)
+        
+        self.x.append(xe)
+        self.y.append(ye)
+        
+        self.goalflag=False
+        
+    def makeaxis(self):
+        plt.axis([0,self.xw,0,self.yw])
+        
+    def plotpts(self):
+        plt.scatter(self.x,self.y, c="blue")
+    
+    def makerandompts(self):
+        x1 = random.randint(1, 2)+self.parentx
+        y1 = random.randint(1, 2)+self.parenty
+        self.parentx=x1
+        self.parenty=y1
+        self.x.append(x1)
+        self.y.append(y1)
+        
+map=rrtmap(100,100,(10,17),(79,74))
+map.makeaxis()
+i=0
+while i<100:
+    map.makerandompts()
+    if map.x[-1]==79 and map.y[-1]==74:
+        i=100
+    i=i+1
+map.plotpts()
+plt.show()
+
